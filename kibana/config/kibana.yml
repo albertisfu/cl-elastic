@@ -2,4 +2,7 @@ server.name: cl-kibana
 server.host: "0.0.0.0"
 elasticsearch.hosts: ["https://cl-es-node:9200"]
 elasticsearch.username: "kibana_system"
+server.ssl.enabled: true
+server.ssl.certificate: config/certs/cl-kibana.crt
+server.ssl.key: config/certs/cl-kibana.key
 elasticsearch.ssl.certificateAuthorities: config/certs/ca.crt
