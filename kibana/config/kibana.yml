@@ -1,6 +1,5 @@
 server.name: cl-kibana
 server.host: "0.0.0.0"
-elasticsearch.hosts: ["http://cl-es-node:9200"]
+elasticsearch.hosts: ["https://cl-es-node:9200"]
 elasticsearch.username: "kibana_system"
-elasticsearch.password: "password"
-xpack.monitoring.enabled: true
+elasticsearch.ssl.certificateAuthorities: config/certs/ca.crt
