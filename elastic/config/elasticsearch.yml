@@ -1,17 +1,19 @@
 cluster.name: "cl-elastic-cluster"
 node.name: cl-es-node
-
+network.host: [_local_,_site_]
+network.publish_host: node_private_ipv4
+http.publish_host: node_private_ipv4
+transport.publish_host: node_private_ipv4
+# Assign these roles for a master eligible node.
 node.roles: [ master, data ]
 
-#discovery.seed_hosts: ["cl-es-node"]
-#cluster.initial_master_nodes: ["cl-es-node"]
+# Only assign the data role for a no master eligible node.
+# node.roles: [ data ]
 
-cloud.node.auto_attributes: true
-network.host: _ec2_
-discovery.seed_providers: ec2
-discovery.ec2.endpoint: ec2.us-west-1.amazonaws.com
-discovery.ec2.tag.role: es-node
-cloud.aws.region: us-west-1
+discovery.seed_hosts: ["node_private_ipv4"]
+# This setting is only required on the master-eligible node during cluster formation.
+# It should be removed after the cluster has been formed.
+cluster.initial_master_nodes: ["cl-es-node"]
 
 bootstrap.memory_lock: true
 
@@ -26,5 +28,3 @@ xpack.security.transport.ssl.certificate: certs/cl-es-node.crt
 xpack.security.transport.ssl.certificate_authorities: certs/ca.crt
 xpack.security.transport.ssl.verification_mode: certificate
 xpack.monitoring.collection.enabled: true
-
-
