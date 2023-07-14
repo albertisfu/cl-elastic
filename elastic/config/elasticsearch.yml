@@ -1,10 +1,17 @@
 cluster.name: "cl-elastic-cluster"
 node.name: cl-es-node
-network.host: _ec2_
+
 node.roles: [ master, data ]
 
-discovery.seed_hosts: ["cl-es-node"]
-cluster.initial_master_nodes: ["cl-es-node"]
+#discovery.seed_hosts: ["cl-es-node"]
+#cluster.initial_master_nodes: ["cl-es-node"]
+
+cloud.node.auto_attributes: true
+network.host: _ec2_
+discovery.seed_providers: ec2
+discovery.ec2.endpoint: ec2.us-west-1.amazonaws.com
+discovery.ec2.tag.role: es-node
+cloud.aws.region: us-west-1
 
 bootstrap.memory_lock: true
 
@@ -21,8 +28,3 @@ xpack.security.transport.ssl.verification_mode: certificate
 xpack.monitoring.collection.enabled: true
 
 
-discovery.seed_providers: ec2
-discovery.ec2.endpoint: ec2.us-west-1.amazonaws.com
-discovery.ec2.tag.role: es-node
-cloud.node.auto_attributes: true
-cloud.aws.region: us-west-1
